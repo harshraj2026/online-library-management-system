@@ -1,0 +1,36 @@
+<!-- <h2>Welcome {{name}}</h2>
+<p>Role: {{role}}</p>
+
+<a href="/search">Search Books</a> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="container">
+    <h2>Welcome {{name}}</h2>
+    <p>Role: {{role}}</p>
+
+    {% if role == "Librarian" %}
+        <div class="card">
+            <h3>Manage Books</h3>
+            <p>Add, update, delete books.</p>
+        </div>
+    {% endif %}
+
+    {% if role == "Student" %}
+        <div class="card">
+            <h3>Search & Issue Books</h3>
+            <p>Find books and borrow easily.</p>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

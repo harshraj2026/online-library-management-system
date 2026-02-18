@@ -1,0 +1,59 @@
+<!-- <form method="POST">
+    Search: <input type="text" name="keyword">
+    <button type="submit">Search</button>
+</form>
+
+{% if books %}
+    <h3>Results:</h3>
+    {% for book in books %}
+        <p>
+            {{book.title}} - {{book.status}}
+            <a href="/issue/{{book.book_id}}">Issue</a>
+            <a href="/return/{{book.book_id}}">Return</a>
+        </p>
+    {% endfor %}
+{% endif %} -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Books</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="container">
+
+    <h2>Search Books</h2>
+
+    <form method="POST">
+        <input type="text" name="keyword" placeholder="Enter book title">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if books %}
+        {% for book in books %}
+            <div class="card">
+                <h3>{{book.title}}</h3>
+                <p><strong>Author:</strong> {{book.author}}</p>
+                <p><strong>Status:</strong> {{book.status}}</p>
+
+                {% if book.status == "Available" %}
+                    <a href="/issue/{{book.book_id}}">
+                        <button>Issue</button>
+                    </a>
+                {% else %}
+                    <a href="/return/{{book.book_id}}">
+                        <button>Return</button>
+                    </a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+</div>
+
+</body>
+</html>
